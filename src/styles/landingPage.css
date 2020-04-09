@@ -1,0 +1,49 @@
+#banner
+{
+    /* background-color: rgb(0,185,120); */
+    background-image: linear-gradient(to bottom, rgb(0,185,120), rgb(0,210,180));
+    color: #fff;
+    padding-top: 5%;
+    padding-bottom: 5%;;
+}
+
+#logo-image
+{
+    width: 80%;    
+}
+
+#categories
+{
+    padding: 80px 0;
+    background-image: linear-gradient(to bottom, rgb(0,210,180), rgb(0,230,200));
+
+}
+
+#category-image
+{
+    width: 250px;
+    margin: 20px;
+}
+
+#achievements
+{
+    background-image: linear-gradient(to bottom, rgb(0,230,200), rgb(0,255,255));
+    padding: 5%;
+}
+
+#list
+{
+    list-style-type: none;
+}
+
+#list-item
+{
+    margin: 15px;
+}
+
+#save-food
+{
+    width: 500px;
+    margin:20px;
+}
+
