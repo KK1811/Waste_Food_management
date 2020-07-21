@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-class SellerRegister extends Component{
+class BuyerRegister extends Component{
     state = {
         firstName: "",
         lastName: "",
@@ -36,7 +36,7 @@ class SellerRegister extends Component{
       };
     
       getData = () => {
-        const url = "/auth/registerSeller";
+        const url = "http://localhost:3002/auth/registerBuyer";
         console.log("in getData")
         console.log({firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -84,9 +84,9 @@ class SellerRegister extends Component{
             console.log("Register successful");
             console.log(response.data[1].token)
             localStorage.setItem('token',response.data[1].token)
-            localStorage.setItem('user', 'seller')
+            localStorage.setItem('user', 'buyer')
             console.log("Token Stored")   
-            this.props.history.push(`/login`) 
+            this.props.history.push(`/buyer`) 
         }
       };
 
@@ -204,7 +204,7 @@ class SellerRegister extends Component{
       render(){
           return(
             <div className="col-md-4 center container">
-                <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Seller Registration</h3>
+                <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Customer Registration</h3>
                 <form className="form-group center">
 
                     <p className="text-danger">{this.state.existingEmailMessage}</p>
@@ -329,13 +329,13 @@ class SellerRegister extends Component{
 
                     <p className="text-danger">{this.state.phoneError}</p>
                 </form>
-                <button className="btn btn-success" onClick={this.handleRegister}>Register</button>  
+                <button className="btn btn-success" onClick={this.handleRegister}>Register</button> 
                 <br/><br/>
-                <Link to='/sellerLogin'>Already have an account? Login now!</Link> 
+                <Link to='/buyerLogin'>Already have an account? Login now!</Link> 
                 <br/><br/><br/><br/>
             </div>
           )
       }
 }
 
-export default SellerRegister
+export default BuyerRegister

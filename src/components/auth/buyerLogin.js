@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
 
-class SellerLogin extends Component{
+class BuyerLogin extends Component{
       constructor(props){
         super(props)
         this.state = {
@@ -16,7 +16,7 @@ class SellerLogin extends Component{
       }
     
       getData = () => {
-        const url = "/auth/sellerLogin";
+        const url = "http://localhost:3002/auth/buyerLogin";
         // var self = this;
         console.log("in getData")
         console.log(this.state)
@@ -47,9 +47,9 @@ class SellerLogin extends Component{
           console.log("Login successful");
               console.log(response.data.token)
               localStorage.setItem('token',response.data.token)
-              localStorage.setItem('user', 'seller')
+              localStorage.setItem('user', 'buyer')
               console.log("Token Stored")  
-              this.props.history.push(`/seller`) 
+              this.props.history.push(`/buyer`) 
               this.props.location.aboutProps.update();
         }
       };
@@ -95,7 +95,7 @@ class SellerLogin extends Component{
       render(){
           return(
             <div className="col-md-4 center container">
-            <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Seller Login</h3>
+            <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Customer Login</h3>
             <form className="form-group center">
 
               <p className="text-danger">{this.state.invalidUserMessage.toString()}</p>
@@ -124,10 +124,10 @@ class SellerLogin extends Component{
             </form>
             <button className="btn btn-success" onClick={this.getData}>Login</button>  
             <br/><br/>
-            <Link to='/sellerRegister'>Don't have an account? Register as a seller!</Link>
+            <Link to='/buyerRegister'>Don't have an account? Register now!</Link>
             </div>
           )
       }
 }
 
-export default SellerLogin
+export default BuyerLogin

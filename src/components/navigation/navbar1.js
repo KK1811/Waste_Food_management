@@ -2,18 +2,15 @@ import React,{Component} from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
 function updateNavbar(){
-    if(localStorage.getItem('token') != null){
-        this.setState({auth : true}); 
-        if(localStorage.getItem('user') == 'buyer'){
-            this.setState({user: 'buyer'});
-        }
-        if(localStorage.getItem('user') == 'seller'){
-            this.setState({user: 'seller'});
-        }
+    if(localStorage.getItem('user') == 'buyer'){
+        this.setState({user: 'buyer'});
+    }
+    if(localStorage.getItem('user') == 'seller'){
+        this.setState({user: 'seller'});
     }
     else{
-        this.setState({auth : false});
-    }
+    this.setState({user: ""});
+    }   
 }
 
 export class Navbar extends Component{ 
@@ -29,13 +26,7 @@ export class Navbar extends Component{
 
     componentDidMount(){
         if(localStorage.getItem('token') != null){
-            this.setState({auth : true}); 
-            if(localStorage.getItem('user') == 'buyer'){
-                this.setState({user: 'buyer'});
-            }
-            if(localStorage.getItem('user') == 'seller'){
-                this.setState({user: 'seller'});
-            }            
+            this.setState({auth : true});     
         }
         else{
             this.setState({auth : false});
@@ -45,13 +36,7 @@ export class Navbar extends Component{
     componentDidUpdate(){
         if(localStorage.getItem('token') != null){
             if(!this.state.auth)
-            this.setState({auth : true}); 
-            if(localStorage.getItem('user') == 'buyer'){
-                this.setState({user: 'buyer'});
-            }
-            if(localStorage.getItem('user') == 'seller'){
-                this.setState({user: 'seller'});
-            }            
+            this.setState({auth : true});       
         }
         else{
             if(this.state.auth){
@@ -72,7 +57,7 @@ export class Navbar extends Component{
                 <Link to='/' className="navbar-brand" style={{ "fontSize":"2.2em" }}>WFM</Link>
                 
             <div className="collapse navbar-collapse container">
-                { this.state.user == 'seller' && (
+                { localStorage.getItem('user') == 'seller' && (
                 <div className="navbar-nav col-md-10">
                     <ul className="navbar-nav mr-auto float-left">
 
@@ -109,21 +94,21 @@ export class Navbar extends Component{
             </div>
 
             <div className="collapse navbar-collapse container">
-                { this.state.user == 'buyer' && (
+                { localStorage.getItem('user') == 'buyer' && (
                 <div className="navbar-nav col-md-10">
                     <ul className="navbar-nav mr-auto float-left">
 
                         <li className="nav-item active">
                             <NavLink to='/seller'>
                                 <div className="float-left">
-                                    <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px" }}>My Subscriptions</button>
+                                    <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px" }}>My Subscriptions</button>
                                 </div>
                             </NavLink>
                         </li>  
                         <li className="nav-item active">
                             <NavLink to='/seller'>
                                 <div className="float-left">
-                                    <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px" }}>New Subscription</button>
+                                    <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px" }}>New Subscription</button>
                                 </div>
                             </NavLink>
                         </li> 
@@ -146,7 +131,7 @@ export class Navbar extends Component{
             </div>            
 
             <div className="float-right container"> 
-                { !this.state.auth == false && (
+                { !this.state.auth && (
                 <div className="container d-flex justify-content-end">
                 <ul className="navbar-nav">
 
