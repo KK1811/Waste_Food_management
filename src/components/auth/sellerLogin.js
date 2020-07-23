@@ -16,7 +16,7 @@ class SellerLogin extends Component{
       }
     
       getData = () => {
-        const url = "/auth/sellerLogin";
+        const url = "http://localhost:3005/auth/sellerLogin";
         // var self = this;
         console.log("in getData")
         console.log(this.state)
@@ -46,10 +46,11 @@ class SellerLogin extends Component{
         if (response.status === 200) {
           console.log("Login successful");
               console.log(response.data.token)
-              localStorage.setItem('token',response.data.token)
+              localStorage.setItem('token',response.data[1].token)
+              localStorage.setItem('id', response.data[0].id)
               localStorage.setItem('user', 'seller')
               console.log("Token Stored")  
-              this.props.history.push(`/seller`) 
+              this.props.history.push(`/seller/create`) 
               this.props.location.aboutProps.update();
         }
       };

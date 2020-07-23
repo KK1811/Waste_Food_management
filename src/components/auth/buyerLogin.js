@@ -45,8 +45,9 @@ class BuyerLogin extends Component{
       completeLogin = response => {
         if (response.status === 200) {
           console.log("Login successful");
-              console.log(response.data.token)
-              localStorage.setItem('token',response.data.token)
+              console.log(response.data[1].token)
+              localStorage.setItem('token',response.data[1].token)
+              localStorage.setItem('id', response.data[0].id)
               localStorage.setItem('user', 'buyer')
               console.log("Token Stored")  
               this.props.history.push(`/buyer`) 

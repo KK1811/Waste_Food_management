@@ -50,6 +50,11 @@ export class Navbar extends Component{
         this.setState({auth: false})
     }
 
+    gotoSubscriptions = () => {
+        console.log("in goto")
+        this.props.history.push(`/mysubscriptions`)
+    }
+
     render(){
         console.log("Nav: " + this.state.update)
         return(
@@ -69,7 +74,7 @@ export class Navbar extends Component{
                             </NavLink>
                         </li>  
                         <li className="nav-item active">
-                            <NavLink to='/seller'>
+                            <NavLink to='/orders'>
                                 <div className="float-left">
                                     <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px" }}>Orders</button>
                                 </div>
@@ -99,18 +104,18 @@ export class Navbar extends Component{
                     <ul className="navbar-nav mr-auto float-left">
 
                         <li className="nav-item active">
-                            <NavLink to='/seller'>
+                            <NavLink to='/subscriptions'>
                                 <div className="float-left">
                                     <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px" }}>My Subscriptions</button>
                                 </div>
                             </NavLink>
                         </li>  
                         <li className="nav-item active">
-                            <NavLink to='/seller'>
+                            
                                 <div className="float-left">
-                                    <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px" }}>New Subscription</button>
+                                    <button type="button" onClick={this.gotoSubscriptions} className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px" }}>New Subscription</button>
                                 </div>
-                            </NavLink>
+                        
                         </li> 
                          
                     </ul>

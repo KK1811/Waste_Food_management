@@ -84,6 +84,7 @@ class BuyerRegister extends Component{
             console.log("Register successful");
             console.log(response.data[1].token)
             localStorage.setItem('token',response.data[1].token)
+            localStorage.setItem('id', response.data[0].id)
             localStorage.setItem('user', 'buyer')
             console.log("Token Stored")   
             this.props.history.push(`/buyer`) 

@@ -36,7 +36,7 @@ class SellerRegister extends Component{
       };
     
       getData = () => {
-        const url = "/auth/registerSeller";
+        const url = "http://localhost:3005/auth/registerSeller";
         console.log("in getData")
         console.log({firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -84,9 +84,10 @@ class SellerRegister extends Component{
             console.log("Register successful");
             console.log(response.data[1].token)
             localStorage.setItem('token',response.data[1].token)
+            localStorage.setItem('id', response.data[0].id)
             localStorage.setItem('user', 'seller')
             console.log("Token Stored")   
-            this.props.history.push(`/login`) 
+            this.props.history.push(`/seller`) 
         }
       };
 
