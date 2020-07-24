@@ -10,6 +10,7 @@ class Create extends Component{
             options: [],
             name: "",
             category: "",
+            defaultPrice: 1,
             quantity: 0,
             addedMessage: "",
             delMessage: ""
@@ -18,16 +19,13 @@ class Create extends Component{
     }
     componentDidMount(){
             const url = "http://localhost:3005/postings/myPostings?isPicked=false";
-            console.log("in getData")
             var token = localStorage.getItem("token");
-            console.log(token)
             var config = {
             headers: { "token": token }
             };
-            axios
+            axios                                                                                               //getting postings
                 .get(url, config, { params: {isPicked: false} })
                 .then((response) =>{
-                    console.log(response.data)
                     this.setState({
                         items: response.data
                     })
@@ -43,7 +41,7 @@ class Create extends Component{
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                                                   //getting postings
             .get(url, config, { params: {isPicked: false} })
             .then((response) =>{
                 this.setState({
@@ -57,20 +55,16 @@ class Create extends Component{
 
     postData = () => {
         const url = "http://localhost:3005/postings";
-        console.log("in postData")
-        console.log(this.state)
         var token = localStorage.getItem("token");
-        console.log(token)
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                                                     //posting new post
           .post(url, {
-              item: {name: this.state.name, category: this.state.category},
+              item: {name: this.state.name, category: this.state.category, defaultPrice: this.state.defaultPrice},
               quantity:this.state.quantity
           }, config)
           .then((response) => {
-            console.log(response);
             this.setState({ addedMessage: "Item Added", delMessage: "" })
           })
           .catch((error) => {
@@ -78,28 +72,21 @@ class Create extends Component{
           });
       };
 
-    handleChange = e => {
+    handleChange = e => {                                                                                          //changing state according to the change in input fields
         this.setState({
             [e.target.id]: e.target.value
           });
-
-          console.log(this.state.category)
-          console.log(e.target.value)
           const url2 = "http://localhost:3005/items/?category=" + e.target.value;
-          console.log(url2)
           var token = localStorage.getItem("token");
-          console.log(token)
           var config = {
           headers: { "token": token }
           };
           axios
               .get(url2, config)
               .then((response) =>{
-                  console.log(response.data)
                   this.setState({
                       options: response.data
                   })
-                  console.log(this.state.options)
               }) 
               .catch((error) => {
                   console.log(error.response)
@@ -107,20 +94,15 @@ class Create extends Component{
       };
 
     handleAdd = () => {
-        console.log("handleADD")
         this.postData();
     };  
 
-    handleDelete = e => {
+    handleDelete = e => {                                                                                       //deleting post
         const url = "http://localhost:3005/postings/"+e.target.value;
-        console.log(url)
-        console.log("in deleteData")
         var token = localStorage.getItem("token");
-        console.log(token)
         axios
             .delete(url, {headers: {"token": token}})
             .then(() => {
-                console.log("deleted")
                 this.setState({ delMessage: "Item Deleted", addedMessage: "" })
             })
             .catch((error) => {
@@ -128,19 +110,18 @@ class Create extends Component{
             })
     };
 
-    createSelectItems() {
-        let options = this.state.options;   
-        console.log(options)      
+    createSelectItems() {                                                                                       //creating options
+        let options = this.state.options;           
         for (let i = 0; i <= 1; i++) {             
         options.push(<option key={this.state.options[i]._id} value={this.state.options[i].name}>{this.state.options[i].name}</option>);   
         }
         return options;
     }  
    
-    onDropdownSelected = e => {
-        console.log("THE VAL", e.target.value);
+    onDropdownSelected = e => {                                                                                   //selecting option
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
+            defaultPrice: e.target.selectedOptions[0].getAttribute("name")
           });
 
     }
@@ -149,7 +130,6 @@ class Create extends Component{
         this.setState({
             [e.target.id]: e.target.value
           });
-
     }
 
     render(){
@@ -172,7 +152,7 @@ class Create extends Component{
         })
 
         var optionItems = this.state.options.map((option) =>
-                {return(<option key={option.name} value={option.name}>{option.name}</option>)}
+                {return(<option name={option.defaultPrice} value={option.name}>{option.name}</option>)}
             );
 
            

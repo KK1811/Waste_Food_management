@@ -18,39 +18,31 @@ class SellerLogin extends Component{
     
       getData = () => {
         const url = "http://localhost:3005/auth/sellerLogin";
-        // var self = this;
-        console.log("in getData")
-        console.log(this.state)
-        axios
+        axios                                                                             //posting user data for validation
           .post(url, {
             email: this.state.email,
             password: this.state.password
           })
           .then((response) => {
-            console.log(response);
             this.completeLogin(response);
           })
           .catch((error) => {
-            console.log(error);
             this.errorLogin(error);
           });
       };
 
-      errorLogin = e => {
+      errorLogin = e => {                                                                 //checking for invalid user
         this.setState({
             invalidUser: true,
             invalidUserMessage: e
           });
       };
 
-      completeLogin = response => {
+      completeLogin = response => {                                                       //completing Login process and storing token
         if (response.status === 200) {
-          console.log("Login successful");
-              console.log(response.data.token)
               localStorage.setItem('token',response.data[1].token)
               localStorage.setItem('id', response.data[0].id)
               localStorage.setItem('user', 'seller')
-              console.log("Token Stored")  
               this.props.history.push(`/seller/create`) 
               this.props.location.aboutProps.update();
         }
@@ -62,21 +54,20 @@ class SellerLogin extends Component{
         }
       };
 
-      handleChange = e => {
+      handleChange = e => {                                                                 //changing state according to the change in input fields
         this.setState({
             [e.target.id]: e.target.value
           });
       };
 
 
-      handleEmail = e => {
+      handleEmail = e => {                                                                  //checking if email is in correct format
         this.handleChange(e);
         if (
           e.target.value.match(
             /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
           )
         ) {
-          console.log("valid email");
           if (!this.state.validEmail) {
             this.setState({
               validEmail: true,
@@ -84,7 +75,6 @@ class SellerLogin extends Component{
             });
           }
         } else {
-          console.log("invalid email");
           if (this.state.validEmail) {
             this.setState({
               validEmail: false,

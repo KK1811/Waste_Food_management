@@ -13,16 +13,13 @@ class Subscriptions extends Component{
     }
     componentDidMount(){
         const url = "http://localhost:3002/subscriptions/mySubscriptions/";
-        console.log("in getData")
         var token = localStorage.getItem("token");
-        console.log(token)
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                                       //getting subscriptions
             .get(url, config)
             .then((response) =>{
-                console.log(response.data)
                 this.setState({
                     items: response.data
                 })
@@ -38,7 +35,7 @@ class Subscriptions extends Component{
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                                          //getting subscriptions
             .get(url, config)
             .then((response) =>{
                 this.setState({
@@ -50,16 +47,12 @@ class Subscriptions extends Component{
             })
     }
 
-    handleDelete = e => {
+    handleDelete = e => {                                                                               //deleting subscription
         const url = "http://localhost:3002/subscriptions/"+e.target.value;
-        console.log(url)
-        console.log("in deleteData")
         var token = localStorage.getItem("token");
-        console.log(token)
         axios
             .delete(url, {headers: {"token": token}})
             .then(() => {
-                console.log("deleted")
                 this.setState({ delMessage: "Item Deleted", addedMessage: "" })
             })
             .catch((error) => {

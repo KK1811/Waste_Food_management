@@ -15,23 +15,17 @@ class buyerProfile extends Component{
     }
     componentDidMount(){
         const url = "http://localhost:3002/buyers/myProfile";
-        console.log("in getData")
         var token = localStorage.getItem("token");
-        console.log(token)
         var config = {
         headers: { "token": token }
         };
-        axios
-            // .get(url, config, { params: {isPicked: false} })
+        axios                                                                                           //getting profile data
             .get(url, config)
             .then((response) =>{
-                console.log(response.data)
                 this.setState({
                     profile: response.data[0],
                     address: response.data[0].address
                 })
-                console.log(this.state.profile)
-                console.log(this.state.address)
             }) 
             .catch((error) => {
                 console.log(error.response)
@@ -40,16 +34,13 @@ class buyerProfile extends Component{
 
     paymentHandler = async (e) => {
         e.preventDefault();
-        // const orderUrl = `http://localhost:3002/payment/order`;
         const orderUrl = `http://localhost:3002/buyers/order`;
         var token = localStorage.getItem("token");
-        console.log(token)
         var config = {
         headers: { "token": token }
         };
-        const response = await axios.get(orderUrl, config).catch(e => console.log(e));
+        const response = await axios.get(orderUrl, config).catch(e => console.log(e));                          //getting payment details
         const { data } = response;
-        console.log(data);
         const options = {
           key: process.env.RAZOR_PAY_TEST_KEY,
           name: "Waste Food Management",
@@ -59,8 +50,7 @@ class buyerProfile extends Component{
             try {
              const paymentId = response.razorpay_payment_id;
              const url = `http://localhost:3002/buyers/capture/${paymentId}`;
-             const captureResponse = await axios.post(url, {amount: this.state.profile.outStandingBill}, config).catch(e => console.log(e))
-             console.log(captureResponse.data);
+             const captureResponse = await axios.post(url, {amount: this.state.profile.outStandingBill}, config).catch(e => console.log(e))                                                                       //posting payment details
             } catch (err) {
               console.log(err);
             }

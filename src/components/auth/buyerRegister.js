@@ -38,15 +38,7 @@ class BuyerRegister extends Component{
     
       getData = () => {
         const url = "http://localhost:3002/auth/registerBuyer";
-        console.log("in getData")
-        console.log({firstName: this.state.firstName,
-            lastName: this.state.lastName,
-            email: this.state.email,
-            password: this.state.password,
-            phone: this.state.phone,
-            address: this.state.address,
-            location: this.state.location})
-        axios
+        axios                                                                         //sending user data for registration
           .post(url, {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
@@ -57,16 +49,14 @@ class BuyerRegister extends Component{
             location: this.state.location
           })
           .then((response) => {
-            console.log(response);
             this.completeRegister(response);
           })
           .catch((error) => {
-            console.log(error.response);
             this.handleExistingEmail(error.response)
           });
       };
 
-      handleExistingEmail = (response) => {
+      handleExistingEmail = (response) => {                                             //checking for existing user
           if(response.status == 409){
               this.setState({
                   existingEmail: true,
@@ -80,19 +70,16 @@ class BuyerRegister extends Component{
           }
       };
 
-      completeRegister = response => {
+      completeRegister = response => {                                                 //completing registration and storing token
         if (response.status === 200) {
-            console.log("Register successful");
-            console.log(response.data[1].token)
             localStorage.setItem('token',response.data[1].token)
             localStorage.setItem('id', response.data[0].id)
             localStorage.setItem('user', 'buyer')
-            console.log("Token Stored")   
             this.props.history.push(`/buyer/subscriptions`) 
         }
       };
 
-      handleChange = e => {
+      handleChange = e => {                                                           //changing state according to the change in input fields
         this.setState({
             [e.target.id]: e.target.value 
           });
@@ -104,14 +91,13 @@ class BuyerRegister extends Component{
           });
       };
 
-      handleEmail = e => {
+      handleEmail = e => {                                                            //checking if email is in correct format
         this.handleChange(e);
         if (
           e.target.value.match(
             /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
           )
         ) {
-          console.log("valid email");
           if (!this.state.validEmail) {
             this.setState({
               validEmail: true,
@@ -119,7 +105,6 @@ class BuyerRegister extends Component{
             });
           }
         } else {
-          console.log("invalid email");
           if (this.state.validEmail) {
             this.setState({
               validEmail: false,
@@ -129,18 +114,14 @@ class BuyerRegister extends Component{
         }
       };
 
-      handlePassword = e => {
+      handlePassword = e => {                                                       //checking if passwords match
           this.handleChange(e)
-          console.log("Password: " + this.state.password)
-          console.log("Confirm Password: " + this.state.confPassword)
           if(this.state.password === e.target.value){
-            console.log("Passwords Match")
             this.setState({
                 matchPassword: true,
                 passwordError: ""
             });
           }else{
-              console.log("Passwords don't match")
               this.setState({
                   matchPassword: false,
                   passwordError: "Passwords don't match"
@@ -148,16 +129,14 @@ class BuyerRegister extends Component{
           }
       };
 
-      handleName = e => {
+      handleName = e => {                                                           //checking validity of name
         this.handleChange(e);
         if (e.target.value.match(/^[A-Za-z\d_]*$/)) {
-          console.log("Name valid");
           this.setState({
             validName: true,
             nameError: ""
           });
         } else {
-          console.log("Name invalid");
             this.setState({
                 validName: false,
                 nameError: "Please enter a valid name"
@@ -165,9 +144,8 @@ class BuyerRegister extends Component{
         }
       };
 
-      handlePhone = e => {
-        this.handleChange(e);
-        console.log(e.target.value);
+      handlePhone = e => {                                                            //checking validity of phone number
+        this.handleChange(e); 
         if (isNaN(e.target.value) || Number(e.target.value) < 0 || Number(e.target.value) < 1000000000 || Number(e.target.value) > 9999999999) {
           this.setState({
             validPhone: false,
@@ -181,11 +159,10 @@ class BuyerRegister extends Component{
         }
       };
 
-      handlePincode = e => {
+      handlePincode = e => {                                                          //checking validity of phone number
         this.setState({
           address: { ...this.state.address, [e.target.id]: e.target.value }
         });
-        console.log(e.target.value);
         if (isNaN(e.target.value) || Number(e.target.value) < 0 || Number(e.target.value) < 100000 || Number(e.target.value) > 999999) {
           this.setState({
             validPincode: false,

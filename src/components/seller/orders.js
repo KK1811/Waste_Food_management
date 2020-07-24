@@ -24,7 +24,7 @@ class Orders extends Component{
             var config = {
             headers: { "token": token }
             };
-            axios
+            axios                                                                                               //getting postings
                 .get(url, config)
                 .then((response) =>{
                     console.log(response.data)
@@ -43,7 +43,7 @@ class Orders extends Component{
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                                                   //getting postings
             .get(url, config)
             .then((response) =>{
                 this.setState({

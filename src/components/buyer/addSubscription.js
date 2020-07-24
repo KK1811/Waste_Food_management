@@ -19,14 +19,11 @@ class Create extends Component{
 
     postData = () => {
         const url = "http://localhost:3002/subscriptions";
-        console.log("in postData")
-        console.log(this.state)
         var token = localStorage.getItem("token");
-        console.log(token)
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                           //posting a new subscription
           .post(url, {
            details:{
                name: this.state.name,
@@ -35,7 +32,6 @@ class Create extends Component{
            }
           }, config)
           .then((response) => {
-            console.log(response);
             this.setState({ addedMessage: "Item Added", delMessage: "" })
           })
           .catch((error) => {
@@ -43,28 +39,22 @@ class Create extends Component{
           });
       };
 
-    handleChange = e => {
+    handleChange = e => {                                                             //changing state according to the change in input fields
         this.setState({
             [e.target.id]: e.target.value
           });
 
-          console.log(this.state.category)
-          console.log(e.target.value)
           const url2 = "http://localhost:3005/items/?category=" + e.target.value;
-          console.log(url2)
           var token = localStorage.getItem("token");
-          console.log(token)
           var config = {
           headers: { "token": token }
           };
-          axios
+          axios                                                                         //getting options
               .get(url2, config)
               .then((response) =>{
-                  console.log(response.data)
                   this.setState({
                       options: response.data
                   })
-                  console.log(this.state.options)
               }) 
               .catch((error) => {
                   console.log(error.response)
@@ -73,13 +63,11 @@ class Create extends Component{
       };
 
     handleAdd = () => {
-        console.log("handleADD")
         this.postData();
     };  
 
-    createSelectItems() {
-        let options = this.state.options;   
-        console.log(options)      
+    createSelectItems() {                                                           //create selected items according to category
+        let options = this.state.options;      
         for (let i = 0; i <= 1; i++) {             
         options.push(<option key={this.state.options[i]._id} value={this.state.options[i].name}>{this.state.options[i].name}</option>);   
         }
@@ -87,14 +75,13 @@ class Create extends Component{
     }  
    
     onDropdownSelected = e => {
-        console.log("THE VAL", e.target.value);
         this.setState({
             [e.target.id]: e.target.value
           });
 
     }
 
-    handleQuantity = e => {
+    handleQuantity = e => {                                                         
         this.setState({
             [e.target.id]: e.target.value
           });

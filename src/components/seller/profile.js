@@ -13,22 +13,17 @@ class sellerProfile extends Component{
     }
     componentDidMount(){
         const url = "http://localhost:3005/sellers/myProfile";
-        console.log("in getData")
         var token = localStorage.getItem("token");
-        console.log(token)
         var config = {
         headers: { "token": token }
         };
-        axios
+        axios                                                                                   //getting profile data
             .get(url, config)
             .then((response) =>{
-                console.log(response.data)
                 this.setState({
                     profile: response.data[0],
                     address: response.data[0].address
                 })
-                console.log(this.state.profile)
-                console.log(this.state.address)
             }) 
             .catch((error) => {
                 console.log(error.response)
