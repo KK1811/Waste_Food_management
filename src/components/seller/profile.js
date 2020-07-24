@@ -60,7 +60,7 @@ class sellerProfile extends Component{
                         Pincode: {this.state.address.pincode}<br/>
                     </h5> 
                     <br/>  
-                    <h5>{this.state.profile.wallet}{!this.state.profile.wallet && (<p>0</p>)}</h5>
+                    <h5>{this.state.profile.wallet}{!this.state.profile.wallet && (<h4>0</h4>)}</h5>
                     
                     </div>
                 </div>

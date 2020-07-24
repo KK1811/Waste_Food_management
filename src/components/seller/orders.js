@@ -17,7 +17,7 @@ class Orders extends Component{
     
     }
     componentDidMount(){
-            const url = "http://localhost:3005/postings/myPostings?isPicked=true";
+            const url = "http://localhost:3005/postings/myPostings";
             console.log("in getData")
             var token = localStorage.getItem("token");
             console.log(token)
@@ -38,7 +38,7 @@ class Orders extends Component{
     }
 
     componentDidUpdate(){
-        const url = "http://localhost:3005/postings/myPostings?isPicked=true";
+        const url = "http://localhost:3005/postings/myPostings";
         var token = localStorage.getItem("token");
         var config = {
         headers: { "token": token }

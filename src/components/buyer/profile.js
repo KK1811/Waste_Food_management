@@ -75,7 +75,6 @@ class buyerProfile extends Component{
                     <h4>Phone: </h4>
                     <h4>Address: </h4>
                     <br/><br/><br/><br/>
-                    <h4>Wallet Balance: </h4>
                     <h4>Outstanding Bill: </h4>
                     </div>
                     <div className="col-md-6 float-left">
@@ -90,7 +89,6 @@ class buyerProfile extends Component{
                         Pincode: {this.state.address.pincode}<br/>
                     </h5> 
                     <br/>  
-                    <h5>{this.state.profile.wallet}{!this.state.profile.wallet && (<p>0</p>)}</h5>
                     <h5>{this.state.profile.outStandingBill}{!this.state.profile.outStandingBill && (<h5>0</h5>)}</h5>
                     {/* <Payment /> */}
                     <button className="btn btn-success" onClick={this.paymentHandler}>Pay Now</button>

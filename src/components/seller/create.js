@@ -76,6 +76,7 @@ class Create extends Component{
         this.setState({
             [e.target.id]: e.target.value
           });
+          console.log("in change")
           const url2 = "http://localhost:3005/items/?category=" + e.target.value;
           var token = localStorage.getItem("token");
           var config = {
@@ -87,6 +88,7 @@ class Create extends Component{
                   this.setState({
                       options: response.data
                   })
+                  console.log(response)
               }) 
               .catch((error) => {
                   console.log(error.response)
