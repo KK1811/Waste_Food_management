@@ -20,7 +20,6 @@ class Subscriptions extends Component{
         headers: { "token": token }
         };
         axios
-            // .get(url, config, { params: {isPicked: false} })
             .get(url, config)
             .then((response) =>{
                 console.log(response.data)
@@ -35,16 +34,13 @@ class Subscriptions extends Component{
 
     componentDidUpdate(){
         const url = "http://localhost:3002/subscriptions/mySubscriptions/";
-        // console.log("in getData")
         var token = localStorage.getItem("token");
-        // console.log(token)
         var config = {
         headers: { "token": token }
         };
         axios
             .get(url, config)
             .then((response) =>{
-                // console.log(response.data)
                 this.setState({
                     items: response.data,
                 })
@@ -80,7 +76,6 @@ class Subscriptions extends Component{
                     <div className="list-group-item">
                     <div className="col-md-4 float-left">{item.name}</div>
                         <div className="col-md-4 float-left">{item.details.name}</div>
-                        {/* <div className="col-md-4 float-left">{item.category}</div> */}
                         <div className="col-md-3 float-left">{item.details.quantity}</div>
                         <button className="col-md-1 float-right btn btn-danger" value={item._id} onClick={this.handleDelete}>X</button>
                         <br/>

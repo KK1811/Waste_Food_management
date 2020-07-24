@@ -20,7 +20,6 @@ class sellerProfile extends Component{
         headers: { "token": token }
         };
         axios
-            // .get(url, config, { params: {isPicked: false} })
             .get(url, config)
             .then((response) =>{
                 console.log(response.data)

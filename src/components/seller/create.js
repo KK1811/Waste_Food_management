@@ -26,7 +26,6 @@ class Create extends Component{
             };
             axios
                 .get(url, config, { params: {isPicked: false} })
-                // .get(url, config)
                 .then((response) =>{
                     console.log(response.data)
                     this.setState({
@@ -40,26 +39,20 @@ class Create extends Component{
 
     componentDidUpdate(){
         const url = "http://localhost:3005/postings/myPostings?isPicked=false";
-        // console.log("in getData")
         var token = localStorage.getItem("token");
-        // console.log(token)
         var config = {
         headers: { "token": token }
         };
         axios
             .get(url, config, { params: {isPicked: false} })
-            // .get(url, config)
             .then((response) =>{
-                // console.log(response.data)
                 this.setState({
                     items: response.data,
                 })
             }) 
             .catch((error) => {
                 console.log(error.response)
-            })
-
-   
+            }) 
     }
 
     postData = () => {
@@ -74,17 +67,14 @@ class Create extends Component{
         axios
           .post(url, {
               item: {name: this.state.name, category: this.state.category},
-            //   category:this.state.category,
               quantity:this.state.quantity
           }, config)
           .then((response) => {
             console.log(response);
             this.setState({ addedMessage: "Item Added", delMessage: "" })
-            // this.completeLogin(response);
           })
           .catch((error) => {
             console.log(error.response);
-            // this.errorLogin(error);
           });
       };
 
@@ -103,7 +93,6 @@ class Create extends Component{
           headers: { "token": token }
           };
           axios
-              // .get(url, config, { params: {isPicked: false} })
               .get(url2, config)
               .then((response) =>{
                   console.log(response.data)
@@ -115,7 +104,6 @@ class Create extends Component{
               .catch((error) => {
                   console.log(error.response)
               })   
-
       };
 
     handleAdd = () => {
@@ -171,14 +159,12 @@ class Create extends Component{
                 <div className="row container list-group" key={item._id}>
                     <div className="list-group-item">
                         <div className="col-md-4 float-left">{item.item.name}</div>
-                        {/* <div className="col-md-4 float-left">{item.category}</div> */}
                         <div className="col-md-3 float-left">{item.quantity}</div>
                         <div className="col-md-3 float-left">
                             <div>{item.isPicked && (<p className="text-success">Picked up</p>)}</div>
                             <div>{!item.isPicked && (<p className="text-danger">Pickup Pending</p>)}</div>
                         </div>
                         {!item.isPicked && (<button className="col-md-1 float-right btn btn-danger" value={item._id} onClick={this.handleDelete}>X</button>)}
-                        {/* <button className="col-md-1 float-right btn btn-danger" value={item._id} onClick={this.handleDelete}>X</button> */}
                         <br/>
                     </div>
                 </div>

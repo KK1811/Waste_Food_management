@@ -25,7 +25,6 @@ class Orders extends Component{
             headers: { "token": token }
             };
             axios
-                // .get(url, config, { params: {isPicked: true} })
                 .get(url, config)
                 .then((response) =>{
                     console.log(response.data)
@@ -40,16 +39,13 @@ class Orders extends Component{
 
     componentDidUpdate(){
         const url = "http://localhost:3005/postings/myPostings?isPicked=true";
-        // console.log("in getData")
         var token = localStorage.getItem("token");
-        // console.log(token)
         var config = {
         headers: { "token": token }
         };
         axios
             .get(url, config)
             .then((response) =>{
-                // console.log(response.data)
                 this.setState({
                     items: response.data,
                 })
@@ -66,13 +62,11 @@ class Orders extends Component{
                 <div className="row container list-group" key={item._id}>
                     <div className="list-group-item">
                         <div className="col-md-4 float-left">{item.item.name}</div>
-                        {/* <div className="col-md-4 float-left">{item.category}</div> */}
                         <div className="col-md-3 float-left">{item.quantity}</div>
                         <div className="col-md-3 float-left">
                             <div>{item.isPicked && (<p className="text-success">Picked up</p>)}</div>
                             <div>{!item.isPicked && (<p className="text-danger">Pickup Pending</p>)}</div>
                         </div>
-                        {/* <button className="col-md-1 float-right btn btn-danger" value={item._id} onClick={this.handleDelete}>X</button> */}
                         <br/>
                     </div>
                 </div>

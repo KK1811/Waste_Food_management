@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { BuyerNavbar } from '../navigation/buyerNavbar'
+// import  {Payment}  from './payment'
 
 class buyerProfile extends Component{
     constructor(props){
         super(props)
         this.state = {
             profile: "",
-            address: ""
+            address: "",
+            paymentData: ""
         }
     
     }
@@ -35,6 +37,38 @@ class buyerProfile extends Component{
                 console.log(error.response)
             })
     }
+
+    paymentHandler = async (e) => {
+        e.preventDefault();
+        // const orderUrl = `http://localhost:3002/payment/order`;
+        const orderUrl = `http://localhost:3002/buyers/order`;
+        var token = localStorage.getItem("token");
+        console.log(token)
+        var config = {
+        headers: { "token": token }
+        };
+        const response = await axios.get(orderUrl, config).catch(e => console.log(e));
+        const { data } = response;
+        console.log(data);
+        const options = {
+          key: process.env.RAZOR_PAY_TEST_KEY,
+          name: "Waste Food Management",
+          description: "Customer Bill Payment",
+          order_id: data.id,
+          handler: async (response) => {
+            try {
+             const paymentId = response.razorpay_payment_id;
+             const url = `http://localhost:3002/buyers/capture/${paymentId}`;
+             const captureResponse = await axios.post(url, {amount: this.state.profile.outStandingBill}, config).catch(e => console.log(e))
+             console.log(captureResponse.data);
+            } catch (err) {
+              console.log(err);
+            }
+          },  theme: {
+            color: "#686CFD",
+          },
+        };
+        const rzp1 = new window.Razorpay(options);rzp1.open();};
 
     render(){
 
@@ -68,25 +102,8 @@ class buyerProfile extends Component{
                     <br/>  
                     <h5>{this.state.profile.wallet}{!this.state.profile.wallet && (<p>0</p>)}</h5>
                     <h5>{this.state.profile.outStandingBill}{!this.state.profile.outStandingBill && (<h5>0</h5>)}</h5>
-
-                    <form action="" method="POST">
-                        <script src="https://checkout.razorpay.com/v1/checkout.js" 
-                        data-key="rzp_test_Brb8XikYT4Alsv" 
-                        data-amount={this.state.profile.outStandingBill}
-                        data-currency="INR" 
-                        data-order_id={this.state.profile.email}
-                        data-buttontext="Pay with Razorpay" 
-                        data-name="WFM"
-                        data-description="Subscription" data-image="https://example.com/your_logo.jpg" 
-                        // data-prefill.name=""
-                        // data-prefill.email="" 
-                        // data-prefill.contact="" 
-                        // data-theme.color="#F37254" 
-                        />
-                        <input type="hidden" custom="Hidden Element" name="hidden" />
-                        <button className="btn btn-success">Pay Now</button>
-                    </form>
-
+                    {/* <Payment /> */}
+                    <button className="btn btn-success" onClick={this.paymentHandler}>Pay Now</button>
                     </div>
                 </div>
             </div>
