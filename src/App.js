@@ -13,6 +13,9 @@ import landingpage from './components/home/landingPage'
 import subscriptions from './components/buyer/subscriptions'
 import addSubscription from './components/buyer/addSubscription'
 // import { SellerNavbar } from './components/navigation/sellerNavbar'
+import buyerProfile from './components/buyer/profile'
+import sellerProfile from './components/seller/profile'
+import payment from './components/buyer/payment'
 
 function App() {
   return (
@@ -25,9 +28,12 @@ function App() {
           <Route exact path='/buyerLogin' component={buyerLogin} />
           <Route exact path='/buyerRegister' component={buyerRegister} />
           <Route exact path='/seller/create' component={create} />
-          <Route exact path='/subscriptions' component={subscriptions} />
-          <Route exact path='/addSubscription' component={addSubscription} />
+          <Route exact path='/buyer/subscriptions' component={subscriptions} />
+          <Route exact path='/buyer/addSubscription' component={addSubscription} />
           <Route exact path='/seller/orders' component={orders} />
+          <Route exact path ='/buyer/profile' component={buyerProfile} />
+          <Route exact path ='/seller/profile' component={sellerProfile} />
+          <Route exact path ='/buyer/payment' component={payment} />
         </Switch>
       </BrowserRouter>
     </div>

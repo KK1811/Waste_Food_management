@@ -17,7 +17,7 @@ class Create extends Component{
     
     }
     componentDidMount(){
-            const url = "http://localhost:3005/postings/myPostings";
+            const url = "http://localhost:3005/postings/myPostings?isPicked=false";
             console.log("in getData")
             var token = localStorage.getItem("token");
             console.log(token)
@@ -39,7 +39,7 @@ class Create extends Component{
     }
 
     componentDidUpdate(){
-        const url = "http://localhost:3005/postings/myPostings";
+        const url = "http://localhost:3005/postings/myPostings?isPicked=false";
         // console.log("in getData")
         var token = localStorage.getItem("token");
         // console.log(token)
@@ -73,7 +73,7 @@ class Create extends Component{
         };
         axios
           .post(url, {
-              item: {name: this.state.name},
+              item: {name: this.state.name, category: this.state.category},
             //   category:this.state.category,
               quantity:this.state.quantity
           }, config)
@@ -177,6 +177,7 @@ class Create extends Component{
                             <div>{item.isPicked && (<p className="text-success">Picked up</p>)}</div>
                             <div>{!item.isPicked && (<p className="text-danger">Pickup Pending</p>)}</div>
                         </div>
+                        {!item.isPicked && (<button className="col-md-1 float-right btn btn-danger" value={item._id} onClick={this.handleDelete}>X</button>)}
                         {/* <button className="col-md-1 float-right btn btn-danger" value={item._id} onClick={this.handleDelete}>X</button> */}
                         <br/>
                     </div>
@@ -244,7 +245,7 @@ class Create extends Component{
                     </div>
                 </form>
                 <br/><br/><br/><br/>
-                <button className="btn btn-primary center" onClick={this.handleAdd}>Subscribe</button>
+                <button className="btn btn-primary center" onClick={this.handleAdd}>Add</button>
                 <br/><br/><br/>
             </div>
             </div>

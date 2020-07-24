@@ -5,11 +5,13 @@ import fruits from '../../assets/vegetables2.png'
 import dairy from '../../assets/dairy3.png'
 import meat from '../../assets/meat3.png'
 import savefood from '../../assets/save-food.png'
+import { HomeNavbar } from './homeNavbar'
 
 class LandingPage extends Component{
     render(){
         return(
             <div>
+                <HomeNavbar />
                 <section id="banner">
                     <div className="container">
                         <div className="row">

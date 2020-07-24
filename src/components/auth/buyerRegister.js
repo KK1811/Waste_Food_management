@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { HomeNavbar } from '../home/homeNavbar'
 
 class BuyerRegister extends Component{
     state = {
@@ -87,7 +88,7 @@ class BuyerRegister extends Component{
             localStorage.setItem('id', response.data[0].id)
             localStorage.setItem('user', 'buyer')
             console.log("Token Stored")   
-            this.props.history.push(`/buyer`) 
+            this.props.history.push(`/buyer/subscriptions`) 
         }
       };
 
@@ -181,7 +182,9 @@ class BuyerRegister extends Component{
       };
 
       handlePincode = e => {
-        this.handleChange(e);
+        this.setState({
+          address: { ...this.state.address, [e.target.id]: e.target.value }
+        });
         console.log(e.target.value);
         if (isNaN(e.target.value) || Number(e.target.value) < 0 || Number(e.target.value) < 100000 || Number(e.target.value) > 999999) {
           this.setState({
@@ -204,6 +207,7 @@ class BuyerRegister extends Component{
 
       render(){
           return(
+            <div><HomeNavbar />
             <div className="col-md-4 center container">
                 <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Customer Registration</h3>
                 <form className="form-group center">
@@ -334,6 +338,7 @@ class BuyerRegister extends Component{
                 <br/><br/>
                 <Link to='/buyerLogin'>Already have an account? Login now!</Link> 
                 <br/><br/><br/><br/>
+            </div>
             </div>
           )
       }

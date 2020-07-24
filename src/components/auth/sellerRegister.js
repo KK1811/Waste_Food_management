@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { HomeNavbar } from '../home/homeNavbar'
 
 class SellerRegister extends Component{
     state = {
@@ -87,7 +88,7 @@ class SellerRegister extends Component{
             localStorage.setItem('id', response.data[0].id)
             localStorage.setItem('user', 'seller')
             console.log("Token Stored")   
-            this.props.history.push(`/seller`) 
+            this.props.history.push(`/seller/create`) 
         }
       };
 
@@ -95,6 +96,7 @@ class SellerRegister extends Component{
         this.setState({
             [e.target.id]: e.target.value 
           });
+          console.log(e.target.value)
       };
 
       handleChangeAddress = e => {
@@ -181,7 +183,9 @@ class SellerRegister extends Component{
       };
 
       handlePincode = e => {
-        this.handleChange(e);
+        this.setState({
+          address: { ...this.state.address, [e.target.id]: e.target.value }
+        });
         console.log(e.target.value);
         if (isNaN(e.target.value) || Number(e.target.value) < 0 || Number(e.target.value) < 100000 || Number(e.target.value) > 999999) {
           this.setState({
@@ -204,6 +208,7 @@ class SellerRegister extends Component{
 
       render(){
           return(
+            <div><HomeNavbar />
             <div className="col-md-4 center container">
                 <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Seller Registration</h3>
                 <form className="form-group center">
@@ -334,6 +339,7 @@ class SellerRegister extends Component{
                 <br/><br/>
                 <Link to='/sellerLogin'>Already have an account? Login now!</Link> 
                 <br/><br/><br/><br/>
+            </div>
             </div>
           )
       }

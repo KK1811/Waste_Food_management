@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { HomeNavbar } from '../home/homeNavbar'
 
 class SellerLogin extends Component{
       constructor(props){
@@ -95,6 +96,7 @@ class SellerLogin extends Component{
 
       render(){
           return(
+            <div><HomeNavbar />
             <div className="col-md-4 center container">
             <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Seller Login</h3>
             <form className="form-group center">
@@ -126,6 +128,7 @@ class SellerLogin extends Component{
             <button className="btn btn-success" onClick={this.getData}>Login</button>  
             <br/><br/>
             <Link to='/sellerRegister'>Don't have an account? Register as a seller!</Link>
+            </div>
             </div>
           )
       }

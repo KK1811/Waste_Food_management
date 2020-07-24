@@ -1,7 +1,7 @@
 import React,{Component} from 'react'
 import { Link, NavLink } from 'react-router-dom'
 
-export class SellerNavbar extends Component{ 
+export class BuyerNavbar extends Component{ 
 
     logout(){
         localStorage.clear()
@@ -15,34 +15,36 @@ export class SellerNavbar extends Component{
             <div className="collapse navbar-collapse container">
             <ul className="navbar-nav">
                         <li className="nav-item active float-right">
-                            <NavLink to='/seller/create'>
+                            <NavLink to='/buyer/subscriptions'>
                                 <div className="float-right">
-                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px", "color":"white" }}>Request</button>
+                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px", "color":"white" }}>My Subscriptions</button>
                                 </div>
                             </NavLink>
                         </li>
                         <li className="nav-item active float-right">
-                            <NavLink to='/seller/orders'>
+                            <NavLink to='/buyer/addSubscription'>
                                 <div className="float-right">
-                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px", "color":"white" }}>Orders</button>
+                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"280px", "color":"white" }}>New Subscription</button>
                                 </div>
                             </NavLink>
                         </li>
                         <li className="nav-item active float-right">
                         
-                            <NavLink to='/seller/profile'>
+                            <NavLink to='/buyer/profile'>
                                 <div className="float-right">
-                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px", "margin-left":"400px", "color":"white" }}>Profile</button>
+                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px", "margin-left":"300px", "color":"white" }}>Profile</button>
                                 </div>
                             </NavLink>
                             
                         </li>
                         <li className="nav-item active float-right">
+                        
                             <NavLink to='/'>
                                 <div className="float-right">
-                                <   button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px", "margin-left":"50px", "color":"white" }} onClick={this.logout}>Logout</button>
+                                <button type="button" className="btn btn-success right" style={{ "fontSize":"1.8em","width":"180px", "margin-left":"100px", "color":"white" }} onClick={this.logout}>Logout</button>
                                 </div>
                             </NavLink>
+                            
                         </li>
                     </ul>
                 

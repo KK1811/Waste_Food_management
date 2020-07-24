@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import { HomeNavbar } from '../home/homeNavbar'
 
 class BuyerLogin extends Component{
       constructor(props){
@@ -17,7 +18,6 @@ class BuyerLogin extends Component{
     
       getData = () => {
         const url = "http://localhost:3002/auth/buyerLogin";
-        // var self = this;
         console.log("in getData")
         console.log(this.state)
         axios
@@ -50,7 +50,7 @@ class BuyerLogin extends Component{
               localStorage.setItem('id', response.data[0].id)
               localStorage.setItem('user', 'buyer')
               console.log("Token Stored")  
-              this.props.history.push(`/buyer`) 
+              this.props.history.push(`/buyer/subscriptions`) 
               this.props.location.aboutProps.update();
         }
       };
@@ -95,37 +95,39 @@ class BuyerLogin extends Component{
 
       render(){
           return(
-            <div className="col-md-4 center container">
-            <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Customer Login</h3>
-            <form className="form-group center">
+            <div><HomeNavbar />
+              <div className="col-md-4 center container">
+                <h3 style={{"padding-top":"80px","padding-bottom":"30px"}}>Customer Login</h3>
+                  <form className="form-group center">
 
-              <p className="text-danger">{this.state.invalidUserMessage.toString()}</p>
+                    <p className="text-danger">{this.state.invalidUserMessage.toString()}</p>
 
-              <label htmlFor="exampleInputEmail1">Email</label>
-              <input
-                className="form-control"
-                id="email"
-                onChange={this.handleEmail}
-                type="email"
-                aria-describedby="emailHelp"
-                placeholder="Email"
-              />
+                    <label htmlFor="exampleInputEmail1">Email</label>
+                    <input
+                      className="form-control"
+                      id="email"
+                      onChange={this.handleEmail}
+                      type="email"
+                      aria-describedby="emailHelp"
+                      placeholder="Email"
+                    />
 
-              <p className="text-danger">{this.state.emailError}</p>
-              
-              <label htmlFor="exampleInputPassword1">Password</label>
-              <input
-                className="form-control"
-                id="password"
-                onChange={this.handleChange}
-                type="password"
-                placeholder="Password"
-              />
-              
-            </form>
-            <button className="btn btn-success" onClick={this.getData}>Login</button>  
-            <br/><br/>
-            <Link to='/buyerRegister'>Don't have an account? Register now!</Link>
+                    <p className="text-danger">{this.state.emailError}</p>
+                    
+                    <label htmlFor="exampleInputPassword1">Password</label>
+                    <input
+                      className="form-control"
+                      id="password"
+                      onChange={this.handleChange}
+                      type="password"
+                      placeholder="Password"
+                    />
+                    
+                  </form>
+                  <button className="btn btn-success" onClick={this.getData}>Login</button>  
+                  <br/><br/>
+                  <Link to='/buyerRegister'>Don't have an account? Register now!</Link>
+              </div>
             </div>
           )
       }
