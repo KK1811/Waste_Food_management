@@ -50,7 +50,8 @@ class buyerProfile extends Component{
             try {
              const paymentId = response.razorpay_payment_id;
              const url = `http://localhost:3002/buyers/capture/${paymentId}`;
-             const captureResponse = await axios.post(url, {amount: this.state.profile.outStandingBill}, config).catch(e => console.log(e))                                                                       //posting payment details
+             const captureResponse = await axios.post(url, {amount: this.state.profile.outStandingBill}, config).catch(e => console.log(e))
+             console.log(captureResponse)                                                                       //posting payment details
             } catch (err) {
               console.log(err);
             }

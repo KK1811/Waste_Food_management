@@ -21,7 +21,7 @@ class LandingPage extends Component{
                                 <p style={{"fontSize":"30px"}}>Our goal is to minimize food wastage by making use of perishable items that are about to go stale</p>
                             </div>
                             <div className="col-md-6">
-                                <img src={savefoodlogo} id="logo-image" />
+                                <img src={savefoodlogo} id="logo-image" alt="" />
                             </div>
                         </div>    
                     </div>
@@ -32,17 +32,17 @@ class LandingPage extends Component{
                         <h3>Things we try to save</h3><br/><br/>
                         <div className="row">
                             <div className="col-md-4">
-                                <img src={fruits} id="category-image" />
+                                <img src={fruits} id="category-image" alt="" />
                                 <br/>
                                 <h4>Fruits and vegetables</h4>
                             </div>
                             <div className="col-md-4">
-                                <img src={dairy} id="category-image" style={{"width":"250px","padding":"17px 0"}}/>
+                                <img src={dairy} id="category-image" style={{"width":"250px","padding":"17px 0"}} alt="" />
                                 <br/>
                                 <h4>Dairy Products</h4>
                             </div>
                             <div className="col-md-4">
-                                <img src={meat} style={{"width":"250px","padding":"28px 0"}}/>
+                                <img src={meat} style={{"width":"250px","padding":"28px 0"}} alt="" />
                                 <br/>
                                 <h4>Meat</h4>
                             </div>
@@ -64,7 +64,7 @@ class LandingPage extends Component{
                                 </ul>
                             </div>
                             <div className="col-md-6">
-                                <img src={savefood} id="save-food" />
+                                <img src={savefood} id="save-food" alt="" />
                             </div>
                         </div>
                     </div>
